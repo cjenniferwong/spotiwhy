@@ -12,7 +12,7 @@ def welcome_message():
 
 
 @st.cache
-def generate_data(n_columns=10, n_rows=1000):
+def generate_data(n_columns=10, n_rows=10000):
     data = []
     letter_list = ['a', 'b', 'c', 'd', 'e']
     options = ['letters', 'numbers']
@@ -46,7 +46,7 @@ def main():
 
     if option == 'numbers':
         data = original
-        st.write('hello world')
+        # st.write('hello world')
         x = st.slider('Enter a value')
         sampled = data.sample(x)
         st.write(x)
