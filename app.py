@@ -1,14 +1,16 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-# import time
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-options = ['letters', 'numbers']
+
+options = ['Home', 'Demo']
 
 
 def welcome_message():
     st.title('Welcome to Spotiwhy')
-    st.subheader('looking to understand your musical profile')
+    st.subheader('this project looks to understand the components of your musical profile')
 
 
 @st.cache
@@ -22,35 +24,33 @@ def generate_data(n_columns=10, n_rows=10000):
             data.append(np.random.randint(0, 100, n_rows))
         else:
             data.append(np.random.choice(letter_list, n_rows))
-    df = pd.DataFrame(data).T
+    df = pd.DataFrame(data).T  # this seems to be faster than vstack
     df.columns = [f'column_{num}' for num in range(len(df.columns))]
-    print('hello world')
-    # time.sleep(10)
+    print('generating data again')
     return df
 
 
 def main():
     welcome_message()
-    with st.spinner('testing...'):
-        st.markdown('## data generated')
-    option = st.sidebar.selectbox('Which number do you like best?',
-                                  options)
+    with st.spinner('L O A D I N G...'):
+        st.write('')
 
-    st.write(f'You selected: {option}')
+    option = st.sidebar.selectbox('Pages', options)
     original = generate_data()
-    if option == 'letters':
+
+    if option == 'Home':
         user_input = st.text_input('please write something')
         st.write(f'user wrote: {user_input}')
-        data = original
-        data
 
-    if option == 'numbers':
-        data = original
-        # st.write('hello world')
-        x = st.slider('Enter a value')
-        sampled = data.sample(x)
-        st.write(x)
-        sampled
+    if option == 'Demo':
+        st.write('this is just useless data so i can get aquainted with streamlit')
+        x = st.slider('Number of Simulations')
+        sampled = original.sample(x)
+        # generating charts
+        sns.distplot(sampled['column_0'].value_counts(normalize=True))
+        st.pyplot()
+        if st.checkbox('Show df:'):
+            st.dataframe(sampled['column_0'].value_counts(normalize=True))
 
 
 if __name__ == '__main__':
