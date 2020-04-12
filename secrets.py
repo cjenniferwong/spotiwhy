@@ -1,0 +1,7 @@
+# spotify_token='BQAlr3bgdB9GNjEiJwNJUnnAlRPotCXweUOEhiLbAlGgaHf31x2y3hxOomjb_8KPuhxedT8xdmXoYF0s6'
+# client_id="233f0272bc6549e38423f3ae82049764"
+# client_secret="2bfc426f468f4f11bb6c859fe27e2aea"
+client_id='7a7cb46398734551a0d5b04004b3bd60'
+client_secret='9e06223224de44239ee9a6fc34582809'
+redirect_uri='localhost:8888'
+response_type='code'
